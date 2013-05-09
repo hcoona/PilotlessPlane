@@ -32,17 +32,17 @@
             System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
             System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.gyroscopeUserControl1 = new BIT.PilotlessPlane.Client.Views.GyroscopeUserControl();
+            this.dashboardUserControl1 = new BIT.PilotlessPlane.Client.Views.DashboardUserControl();
+            this.dashboardUserControl2 = new BIT.PilotlessPlane.Client.Views.DashboardUserControl();
+            this.dashboardUserControl3 = new BIT.PilotlessPlane.Client.Views.DashboardUserControl();
+            this.directionDashboardUserControl1 = new BIT.PilotlessPlane.Client.Views.DirectionDashboardUserControl();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker_Binding = new System.ComponentModel.BackgroundWorker();
             this.timer_UpdateUI = new System.Windows.Forms.Timer(this.components);
-            this.gyroscopeUserControl1 = new BIT.PilotlessPlane.Client.Views.GyroscopeUserControl();
-            this.dashboardUserControl1 = new BIT.PilotlessPlane.Client.Views.DashboardUserControl();
-            this.dashboardUserControl2 = new BIT.PilotlessPlane.Client.Views.DashboardUserControl();
-            this.dashboardUserControl3 = new BIT.PilotlessPlane.Client.Views.DashboardUserControl();
-            this.directionDashboardUserControl1 = new BIT.PilotlessPlane.Client.Views.DirectionDashboardUserControl();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             tableLayoutPanel1.SuspendLayout();
@@ -95,59 +95,6 @@
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             tableLayoutPanel2.Size = new System.Drawing.Size(480, 600);
             tableLayoutPanel2.TabIndex = 2;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = global::BIT.PilotlessPlane.Client.Properties.Resources.地图区;
-            this.pictureBox1.Location = new System.Drawing.Point(480, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(320, 360);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox2.Image = global::BIT.PilotlessPlane.Client.Properties.Resources.指示灯区;
-            this.pictureBox2.Location = new System.Drawing.Point(480, 360);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(0);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(320, 240);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 4;
-            this.pictureBox2.TabStop = false;
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
-            this.menuStrip1.TabIndex = 4;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(58, 20);
-            this.toolStripMenuItem1.Text = "查看帧";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
-            // 
-            // backgroundWorker_Binding
-            // 
-            this.backgroundWorker_Binding.WorkerReportsProgress = true;
-            this.backgroundWorker_Binding.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_Binding_DoWork);
-            this.backgroundWorker_Binding.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_Binding_ProgressChanged);
-            // 
-            // timer_UpdateUI
-            // 
-            this.timer_UpdateUI.Enabled = true;
-            this.timer_UpdateUI.Interval = 50;
-            this.timer_UpdateUI.Tick += new System.EventHandler(this.timer_UpdateUI_Tick);
             // 
             // gyroscopeUserControl1
             // 
@@ -234,6 +181,59 @@
             this.directionDashboardUserControl1.Size = new System.Drawing.Size(120, 120);
             this.directionDashboardUserControl1.TabIndex = 4;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Image = global::BIT.PilotlessPlane.Client.Properties.Resources.地图区;
+            this.pictureBox1.Location = new System.Drawing.Point(480, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(320, 360);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox2.Image = global::BIT.PilotlessPlane.Client.Properties.Resources.指示灯区;
+            this.pictureBox2.Location = new System.Drawing.Point(480, 360);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(0);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(320, 240);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 4;
+            this.pictureBox2.TabStop = false;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.TabIndex = 4;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(58, 20);
+            this.toolStripMenuItem1.Text = "查看帧";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // backgroundWorker_Binding
+            // 
+            this.backgroundWorker_Binding.WorkerReportsProgress = true;
+            this.backgroundWorker_Binding.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_Binding_DoWork);
+            this.backgroundWorker_Binding.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_Binding_ProgressChanged);
+            // 
+            // timer_UpdateUI
+            // 
+            this.timer_UpdateUI.Enabled = true;
+            this.timer_UpdateUI.Interval = 50;
+            this.timer_UpdateUI.Tick += new System.EventHandler(this.timer_UpdateUI_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -246,6 +246,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "地面站";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

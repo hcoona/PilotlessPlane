@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 using BIT.PilotlessPlane.Models;
-using BIT.PilotlessPlane.Providers.Implement.Local;
 using BIT.PilotlessPlane.Providers.Interface;
 
 namespace BIT.PilotlessPlane.Client.Views
@@ -13,12 +12,21 @@ namespace BIT.PilotlessPlane.Client.Views
         private readonly IFrameProvider provider;
         private FrameForm frameForm = null;
 
+        public MainForm(IFrameProvider provider)
+            : this()
+        {
+            this.provider = provider;
+        }
+
         public MainForm()
         {
             InitializeComponent();
+        }
 
-            this.provider = new LocalFrameProvider();
-            this.backgroundWorker_Binding.RunWorkerAsync(provider.GetFrames());
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            var enumerator = provider.GetFrames();
+            this.backgroundWorker_Binding.RunWorkerAsync(enumerator);
         }
 
         private void backgroundWorker_Binding_DoWork(object sender, DoWorkEventArgs e)

@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
+using Autofac;
 using BIT.PilotlessPlane.Client.Views;
+using BIT.PilotlessPlane.Providers.Implement.Local;
+using BIT.PilotlessPlane.Providers.Interface;
 
 namespace BIT.PilotlessPlane.Client
 {
@@ -16,7 +17,17 @@ namespace BIT.PilotlessPlane.Client
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+
+            IContainer container = BuildContainer();
+            Application.Run(container.Resolve<MainForm>());
+        }
+
+        private static IContainer BuildContainer()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterType<LocalFrameProvider>().As<IFrameProvider>();
+            builder.RegisterType<MainForm>();
+            return builder.Build();
         }
     }
 }
