@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CodeGenerator")]
+[assembly: AssemblyTitle("BIT.PilotlessPlane.Providers.Implement.SerialPort")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CodeGenerator")]
-[assembly: AssemblyCopyright("Copyright ©  2013")]
+[assembly: AssemblyCompany("MSIT")]
+[assembly: AssemblyProduct("BIT.PilotlessPlane.Providers.Implement.SerialPort")]
+[assembly: AssemblyCopyright("Copyright © MSIT 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f93c0835-bfb9-4bcd-a1d7-9eaf32662d68")]
+[assembly: Guid("d268e7d9-11e3-49d9-a749-9ebf30eabe95")]
 
 // Version information for an assembly consists of the following four values:
 //

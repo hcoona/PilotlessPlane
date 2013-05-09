@@ -130,6 +130,10 @@
       <Project>{ae3ad86c-960c-41a7-a109-d93905eb9909}</Project>
       <Name>BIT.PilotlessPlane.Providers.Implement.Local</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BIT.PilotlessPlane.Providers.Implement.SerialPort\BIT.PilotlessPlane.Providers.Implement.SerialPort.csproj">
+      <Project>{4ee31d6d-7657-400a-9f02-0389e238e3fd}</Project>
+      <Name>BIT.PilotlessPlane.Providers.Implement.SerialPort</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BIT.PilotlessPlane.Providers.Interface\BIT.PilotlessPlane.Providers.Interface.csproj">
       <Project>{4398fada-1f02-4049-b777-8aa28a999752}</Project>
       <Name>BIT.PilotlessPlane.Providers.Interface</Name>

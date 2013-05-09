@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{59F3AD94-3AF4-4B0B-A4B9-9270C80FB465}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{4EE31D6D-7657-400A-9F02-0389E238E3FD}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ReceiveAndParse</RootNamespace>
-    <AssemblyName>ReceiveAndParse</AssemblyName>
+    <RootNamespace>BIT.PilotlessPlane.Providers.Implement.SerialPort</RootNamespace>
+    <AssemblyName>BIT.PilotlessPlane.Providers.Implement.SerialPort</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -41,19 +39,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\BitVector32Masks.cs" />
-    <Compile Include="Models\ByteOrderConverter.cs" />
-    <Compile Include="Models\FrameA.cs" />
-    <Compile Include="Models\FrameB.cs" />
-    <Compile Include="Models\FrameC.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="SerialPortFrameProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Underlying\ByteStructureConverter.cs" />
-    <Compile Include="Underlying\FrameA.cs" />
-    <Compile Include="Underlying\FrameB.cs" />
-    <Compile Include="Underlying\FrameC.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\BIT.PilotlessPlane.Models\BIT.PilotlessPlane.Models.csproj">
+      <Project>{09b32a6b-1ae7-4e81-b2d0-651a2be42f9b}</Project>
+      <Name>BIT.PilotlessPlane.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BIT.PilotlessPlane.Providers.Interface\BIT.PilotlessPlane.Providers.Interface.csproj">
+      <Project>{4398fada-1f02-4049-b777-8aa28a999752}</Project>
+      <Name>BIT.PilotlessPlane.Providers.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
