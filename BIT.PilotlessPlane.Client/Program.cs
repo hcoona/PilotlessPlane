@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 using Autofac;
+using Autofac.Configuration;
 using BIT.PilotlessPlane.Client.Views;
-using BIT.PilotlessPlane.Providers.Implement.Local;
-using BIT.PilotlessPlane.Providers.Interface;
 
 namespace BIT.PilotlessPlane.Client
 {
@@ -18,15 +17,14 @@ namespace BIT.PilotlessPlane.Client
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            IContainer container = BuildContainer();
+            var container = BuildContainer();
             Application.Run(container.Resolve<MainForm>());
         }
 
         private static IContainer BuildContainer()
         {
             var builder = new ContainerBuilder();
-            builder.RegisterType<LocalFrameProvider>().As<IFrameProvider>();
-            builder.RegisterType<MainForm>();
+            builder.RegisterModule<ConfigurationSettingsReader>();
             return builder.Build();
         }
     }
