@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Ports;
 using BIT.PilotlessPlane.Models.Underlying;
 using BIT.PilotlessPlane.Providers.Interface;
 
@@ -10,9 +11,24 @@ namespace BIT.PilotlessPlane.Providers.Implement.SerialPort
     {
         private static readonly int FRAME_SIZE = 36;
 
+        private readonly string PortName;
+        private readonly int BaudRate;
+        private readonly Parity Parity;
+        private readonly int DataBits;
+        private readonly StopBits StopBits;
+
+        public SerialPortFrameProvider(string portName, int baudRate, Parity parity, int dataBits, StopBits stopBits)
+        {
+            this.PortName = portName;
+            this.BaudRate = baudRate;
+            this.Parity = parity;
+            this.DataBits = dataBits;
+            this.StopBits = stopBits;
+        }
+
         public IEnumerator<object> GetFrames()
         {
-            using (var port = new global::System.IO.Ports.SerialPort())
+            using (var port = new global::System.IO.Ports.SerialPort(this.PortName, this.BaudRate, this.Parity, this.DataBits, this.StopBits))
             {
                 port.Open();
                 while (true)
