@@ -4,7 +4,7 @@ using UnderlyingFrameB = BIT.PilotlessPlane.Models.Underlying.FrameB;
 
 namespace BIT.PilotlessPlane.Models
 {
-    public partial struct FrameB : IReceivedFrame
+    public partial class FrameB : IReceivedFrame
     {
         private readonly double m_GPS经度;
         private readonly double m_GPS维度;

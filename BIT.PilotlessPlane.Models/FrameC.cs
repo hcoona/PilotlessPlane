@@ -4,7 +4,7 @@ using UnderlyingFrameC = BIT.PilotlessPlane.Models.Underlying.FrameC;
 
 namespace BIT.PilotlessPlane.Models
 {
-    public partial struct FrameC : IReceivedFrame
+    public partial class FrameC : IReceivedFrame
     {
         private static readonly BitVector32.Section z纵向模态Section = BitVector32.CreateSection(7);
         private static readonly BitVector32.Section h横向模态Section = BitVector32.CreateSection(7, z纵向模态Section);
