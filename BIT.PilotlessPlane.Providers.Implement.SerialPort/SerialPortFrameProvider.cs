@@ -76,8 +76,15 @@ namespace BIT.PilotlessPlane.Providers.Implement.SerialPort
             }
             else
             {
+                HexPrint(buffer);
                 throw new InvalidDataException("Wrong DATA!");
             }
+        }
+
+        private static void HexPrint(byte[] buffer)
+        {
+            var hexBuffer = System.Linq.Enumerable.Select(buffer, b => b.ToString("X2"));
+            Console.WriteLine(string.Join(" ", hexBuffer));
         }
 
         private static bool CheckSum(byte[] buffer)

@@ -9,7 +9,7 @@ namespace BIT.PilotlessPlane.Providers.Demo
     {
         static void Main(string[] args)
         {
-            IFrameProvider provider = new LocalFrameProvider();
+            IFrameProvider provider = new BIT.PilotlessPlane.Providers.Implement.SerialPort.SerialPortFrameProvider("COM1", 38400, System.IO.Ports.Parity.None, 8, System.IO.Ports.StopBits.One);
             var enumerator = provider.GetFrames();
 
             // Running in background threads.
