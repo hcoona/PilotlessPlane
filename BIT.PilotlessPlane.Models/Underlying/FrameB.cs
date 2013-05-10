@@ -12,7 +12,7 @@ using System.Runtime.InteropServices;
 
 namespace BIT.PilotlessPlane.Models.Underlying
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1 /* Not Zero! */, Size = 36)]
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1 /* Not Zero! */, Size = Global.FrameSize)]
     public struct FrameB
     {
         public byte z帧头0;
