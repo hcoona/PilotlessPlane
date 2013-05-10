@@ -44,7 +44,6 @@ namespace BIT.PilotlessPlane.Providers.Implement.SerialPort
                         offset += nRead;
                     }
                     yield return Parse(buffer);
-                    System.Threading.Thread.Sleep(50);
                 }
             }
         }
