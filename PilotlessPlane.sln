@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BIT.PilotlessPlane.Client",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BIT.PilotlessPlane.Providers.Implement.SerialPort", "BIT.PilotlessPlane.Providers.Implement.SerialPort\BIT.PilotlessPlane.Providers.Implement.SerialPort.csproj", "{4EE31D6D-7657-400A-9F02-0389E238E3FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZhangShuai.Extensions", "ZhangShuai.Extensions\ZhangShuai.Extensions.csproj", "{473F1DFC-30EB-4458-97EC-554C5B0E0852}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{4EE31D6D-7657-400A-9F02-0389E238E3FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EE31D6D-7657-400A-9F02-0389E238E3FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EE31D6D-7657-400A-9F02-0389E238E3FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{473F1DFC-30EB-4458-97EC-554C5B0E0852}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{473F1DFC-30EB-4458-97EC-554C5B0E0852}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{473F1DFC-30EB-4458-97EC-554C5B0E0852}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{473F1DFC-30EB-4458-97EC-554C5B0E0852}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
