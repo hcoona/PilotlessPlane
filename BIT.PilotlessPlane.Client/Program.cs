@@ -3,6 +3,8 @@ using System.Windows.Forms;
 using Autofac;
 using Autofac.Configuration;
 using BIT.PilotlessPlane.Client.Views;
+using System.Diagnostics;
+using System.Threading;
 
 namespace BIT.PilotlessPlane.Client
 {
@@ -17,8 +19,32 @@ namespace BIT.PilotlessPlane.Client
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var container = BuildContainer();
+            if (!Debugger.IsAttached)
+            {
+                AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+                Application.ThreadException += Application_ThreadException;
+            }
+
+            IContainer container = null;
+            try
+            {
+                container = BuildContainer();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
             Application.Run(container.Resolve<MainForm>());
+        }
+
+        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            MessageBox.Show("Exception", ((Exception)e.ExceptionObject).Message);
+        }
+
+        static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
+        {
+            MessageBox.Show("Exception", e.Exception.Message);
         }
 
         private static IContainer BuildContainer()
