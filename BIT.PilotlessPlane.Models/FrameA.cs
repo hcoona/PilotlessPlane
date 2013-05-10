@@ -4,7 +4,7 @@ using UnderlyingFrameA = BIT.PilotlessPlane.Models.Underlying.FrameA;
 
 namespace BIT.PilotlessPlane.Models
 {
-    public partial struct FrameA
+    public partial class FrameA : IReceivedFrame
     {
         private readonly double m_f俯仰角;
         private readonly double m_f滚转角;

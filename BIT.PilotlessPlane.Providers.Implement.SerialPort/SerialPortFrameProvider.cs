@@ -4,6 +4,7 @@ using System.IO;
 using System.IO.Ports;
 using BIT.PilotlessPlane.Models.Underlying;
 using BIT.PilotlessPlane.Providers.Interface;
+using IReceivedFrame = BIT.PilotlessPlane.Models.IReceivedFrame;
 
 namespace BIT.PilotlessPlane.Providers.Implement.SerialPort
 {
@@ -26,7 +27,7 @@ namespace BIT.PilotlessPlane.Providers.Implement.SerialPort
             this.StopBits = stopBits;
         }
 
-        public IEnumerator<object> GetFrames()
+        public IEnumerator<IReceivedFrame> GetFrames()
         {
             using (var port = new global::System.IO.Ports.SerialPort(this.PortName, this.BaudRate, this.Parity, this.DataBits, this.StopBits))
             {
@@ -48,9 +49,9 @@ namespace BIT.PilotlessPlane.Providers.Implement.SerialPort
             }
         }
 
-        private static object Parse(byte[] buffer)
+        private static IReceivedFrame Parse(byte[] buffer)
         {
-            if (buffer[0] == 0xEB && buffer[1] == 0x90 && buffer[2] == 0x55 && CheckSum(buffer))
+            if (FrameValidator.Validate(buffer))
             {
                 switch (Convert.ToChar(buffer[3]))
                 {
@@ -84,17 +85,6 @@ namespace BIT.PilotlessPlane.Providers.Implement.SerialPort
         {
             var hexBuffer = System.Linq.Enumerable.Select(buffer, b => b.ToString("X2"));
             Console.WriteLine(string.Join(" ", hexBuffer));
-        }
-
-        private static bool CheckSum(byte[] buffer)
-        {
-            byte sum = 0;
-            for (var i = 0; i < buffer.Length - 1; i++)
-            {
-                sum += buffer[i];
-            }
-            sum = (byte)(256 - sum % 256);
-            return sum == buffer[buffer.Length - 1];
         }
     }
 }
