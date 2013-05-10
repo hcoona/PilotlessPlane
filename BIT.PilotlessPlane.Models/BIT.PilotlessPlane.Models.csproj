@@ -45,11 +45,15 @@
     <Compile Include="FrameA.cs" />
     <Compile Include="FrameB.cs" />
     <Compile Include="FrameC.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="IFrame.cs" />
+    <Compile Include="IReceivedFrame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Underlying\ByteStructureConverter.cs" />
     <Compile Include="Underlying\FrameA.cs" />
     <Compile Include="Underlying\FrameB.cs" />
     <Compile Include="Underlying\FrameC.cs" />
+    <Compile Include="Underlying\FrameValidator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

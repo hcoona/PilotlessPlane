@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using BIT.PilotlessPlane.Models.Underlying;
 using BIT.PilotlessPlane.Providers.Implement.Local.Properties;
 using BIT.PilotlessPlane.Providers.Interface;
-using BIT.PilotlessPlane.Models.Underlying;
+using IReceivedFrame = BIT.PilotlessPlane.Models.IReceivedFrame;
 
 namespace BIT.PilotlessPlane.Providers.Implement.Local
 {
@@ -11,7 +12,7 @@ namespace BIT.PilotlessPlane.Providers.Implement.Local
     {
         private static readonly int FRAME_SIZE = 36;
 
-        public IEnumerator<object> GetFrames()
+        public IEnumerator<IReceivedFrame> GetFrames()
         {
             using (var ms = new MemoryStream(Resources._20130402_测试数据))
             {
@@ -32,10 +33,10 @@ namespace BIT.PilotlessPlane.Providers.Implement.Local
                 }
             }
         }
-        
-        private static object Parse(byte[] buffer)
+
+        private static IReceivedFrame Parse(byte[] buffer)
         {
-            if (buffer[0] == 0xEB && buffer[1] == 0x90 && buffer[2] == 0x55 && CheckSum(buffer))
+            if (FrameValidator.Validate(buffer))
             {
                 switch (Convert.ToChar(buffer[3]))
                 {
@@ -62,17 +63,6 @@ namespace BIT.PilotlessPlane.Providers.Implement.Local
             {
                 throw new InvalidDataException("Wrong DATA!");
             }
-        }
-
-        private static bool CheckSum(byte[] buffer)
-        {
-            byte sum = 0;
-            for (var i = 0; i < buffer.Length - 1; i++)
-            {
-                sum += buffer[i];
-            }
-            sum = (byte)(256 - sum % 256);
-            return sum == buffer[buffer.Length - 1];
         }
     }
 }

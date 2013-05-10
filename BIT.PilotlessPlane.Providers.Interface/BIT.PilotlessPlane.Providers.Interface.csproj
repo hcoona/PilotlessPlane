@@ -43,6 +43,12 @@
     <Compile Include="IFrameProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BIT.PilotlessPlane.Models\BIT.PilotlessPlane.Models.csproj">
+      <Project>{09b32a6b-1ae7-4e81-b2d0-651a2be42f9b}</Project>
+      <Name>BIT.PilotlessPlane.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
