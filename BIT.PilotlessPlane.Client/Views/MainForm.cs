@@ -60,6 +60,11 @@ namespace BIT.PilotlessPlane.Client.Views
             }
         }
 
+        private void backgroundWorker_Binding_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            MessageBox.Show(this, "Done.");
+        }
+
         private void BindFrameA(FrameA frameA)
         {
             this.gyroscopeUserControl1.f俯仰角 = frameA.f俯仰角;

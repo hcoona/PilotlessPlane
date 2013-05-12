@@ -4,6 +4,7 @@ using System.IO;
 using BIT.PilotlessPlane.Models.Underlying;
 using BIT.PilotlessPlane.Providers.Implement.Local.Properties;
 using BIT.PilotlessPlane.Providers.Interface;
+using ZhangShuai.Extensions;
 using IReceivedFrame = BIT.PilotlessPlane.Models.IReceivedFrame;
 
 namespace BIT.PilotlessPlane.Providers.Implement.Local
@@ -11,26 +12,51 @@ namespace BIT.PilotlessPlane.Providers.Implement.Local
     public class LocalFrameProvider : IFrameProvider
     {
         private static readonly int FRAME_SIZE = 36;
+        private readonly byte[] data;
+
+        public LocalFrameProvider()
+            : this(Resources._20130402_测试数据)
+        { }
+
+        public LocalFrameProvider(byte[] data)
+        {
+            if (data == null || data.Length == 0)
+            {
+                this.data = Resources._20130402_测试数据;
+            }
+            else
+            {
+                this.data = data;
+            }
+        }
 
         public IEnumerator<IReceivedFrame> GetFrames()
         {
-            using (var ms = new MemoryStream(Resources._20130402_测试数据))
+            using (var ms = new MemoryStream(this.data))
             {
-                while (true)
+                var e = ms
+                    .ToEnumerable(StreamToEnumerable)
+                    .ToWindowed(FRAME_SIZE)
+                    .GetEnumerator();
+                while(e.MoveNext())
                 {
-                    var buffer = new byte[FRAME_SIZE];
-                    for (var offset = 0; offset < FRAME_SIZE; )
+                    var buffer = e.Current;
+                    if(FrameValidator.Validate(buffer))
                     {
-                        var nRead = ms.Read(buffer, offset, FRAME_SIZE - offset);
-                        if (nRead == 0)
-                        {
-                            yield break;
-                        }
-                        offset += nRead;
+                        yield return Parse(buffer);
+                        System.Threading.Thread.Sleep(10);
                     }
-                    yield return Parse(buffer);
-                    System.Threading.Thread.Sleep(50);
                 }
+            }
+        }
+
+        private static IEnumerable<byte> StreamToEnumerable(Stream s)
+        {
+            int n = s.ReadByte();
+            while (n != -1)
+            {
+                yield return (byte)n;
+                n = s.ReadByte();
             }
         }
 
