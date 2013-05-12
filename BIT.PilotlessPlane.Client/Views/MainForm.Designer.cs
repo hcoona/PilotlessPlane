@@ -227,6 +227,7 @@
             this.backgroundWorker_Binding.WorkerReportsProgress = true;
             this.backgroundWorker_Binding.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_Binding_DoWork);
             this.backgroundWorker_Binding.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_Binding_ProgressChanged);
+            this.backgroundWorker_Binding.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_Binding_RunWorkerCompleted);
             // 
             // timer_UpdateUI
             // 
