@@ -231,7 +231,7 @@
             // timer_UpdateUI
             // 
             this.timer_UpdateUI.Enabled = true;
-            this.timer_UpdateUI.Interval = 50;
+            this.timer_UpdateUI.Interval = 33;
             this.timer_UpdateUI.Tick += new System.EventHandler(this.timer_UpdateUI_Tick);
             // 
             // MainForm
