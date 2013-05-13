@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Threading;
 using System.Windows.Forms;
 using Autofac;
 using Autofac.Configuration;
 using BIT.PilotlessPlane.Client.Views;
-using System.Diagnostics;
-using System.Threading;
+using BIT.PilotlessPlane.Providers.Implement.Local;
+using BIT.PilotlessPlane.Providers.Interface;
+using LocalDataResources = BIT.PilotlessPlane.Providers.Implement.Local.Properties.Resources;
 
 namespace BIT.PilotlessPlane.Client
 {
@@ -39,17 +42,21 @@ namespace BIT.PilotlessPlane.Client
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            MessageBox.Show("Exception", ((Exception)e.ExceptionObject).Message);
+            MessageBox.Show(((Exception)e.ExceptionObject).Message);
         }
 
         static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
-            MessageBox.Show("Exception", e.Exception.Message);
+            MessageBox.Show(e.Exception.Message);
         }
 
         private static IContainer BuildContainer()
         {
             var builder = new ContainerBuilder();
+            builder
+                .Register<LocalFrameProvider>(ctx => new LocalFrameProvider(LocalDataResources._20130510_txt))
+                .As<IFrameProvider>()
+                .SingleInstance();
             builder.RegisterModule<ConfigurationSettingsReader>();
             return builder.Build();
         }

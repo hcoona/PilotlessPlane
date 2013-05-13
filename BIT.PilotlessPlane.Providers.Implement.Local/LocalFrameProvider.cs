@@ -14,20 +14,13 @@ namespace BIT.PilotlessPlane.Providers.Implement.Local
         private static readonly int FRAME_SIZE = 36;
         private readonly byte[] data;
 
-        public LocalFrameProvider()
-            : this(Resources._20130402_测试数据)
-        { }
-
         public LocalFrameProvider(byte[] data)
         {
-            if (data == null || data.Length == 0)
+            if (data == null)
             {
-                this.data = Resources._20130402_测试数据;
+                throw new ArgumentNullException();
             }
-            else
-            {
-                this.data = data;
-            }
+            this.data = data;
         }
 
         public IEnumerator<IReceivedFrame> GetFrames()
@@ -44,7 +37,7 @@ namespace BIT.PilotlessPlane.Providers.Implement.Local
                     if(FrameValidator.Validate(buffer))
                     {
                         yield return Parse(buffer);
-                        System.Threading.Thread.Sleep(10);
+                        System.Threading.Thread.Sleep(50);
                     }
                 }
             }

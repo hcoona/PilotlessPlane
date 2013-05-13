@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO.Ports;
 using BIT.PilotlessPlane.Providers.Implement.Local;
+using BIT.PilotlessPlane.Providers.Implement.SerialPort;
 using BIT.PilotlessPlane.Providers.Interface;
 
 namespace BIT.PilotlessPlane.Providers.Demo
@@ -9,7 +11,9 @@ namespace BIT.PilotlessPlane.Providers.Demo
     {
         static void Main(string[] args)
         {
-            IFrameProvider provider = new BIT.PilotlessPlane.Providers.Implement.SerialPort.SerialPortFrameProvider("COM1", 38400, System.IO.Ports.Parity.None, 8, System.IO.Ports.StopBits.One);
+            IFrameProvider provider;
+            provider = new SerialPortFrameProvider("COM1", 38400, Parity.None, 8, StopBits.One);
+            provider = new LocalFrameProvider(Providers.Implement.Local.Properties.Resources._20130510_txt);
             var enumerator = provider.GetFrames();
 
             // Running in background threads.
