@@ -25,22 +25,46 @@ namespace BIT.PilotlessPlane.Providers.Implement.Local
 
         public IEnumerator<IReceivedFrame> GetFrames()
         {
+            bool lastestFailed = true;
             using (var ms = new MemoryStream(this.data))
             {
                 var e = ms
                     .ToEnumerable(StreamToEnumerable)
                     .ToWindowed(FRAME_SIZE)
                     .GetEnumerator();
-                while(e.MoveNext())
+                while (e.MoveNext())
                 {
                     var buffer = e.Current;
-                    if(FrameValidator.Validate(buffer))
+                    if (FrameValidator.Validate(buffer))
                     {
+                        if(lastestFailed)
+                        {
+                            Console.WriteLine("Finally Success:");
+                            Console.Write('\t');
+                            Console.WriteLine(ToHexString(buffer));
+                            lastestFailed = false;
+                        }
                         yield return Parse(buffer);
                         System.Threading.Thread.Sleep(50);
+                        for (var i = 1; i < FRAME_SIZE; i++)
+                        {
+                            e.MoveNext();
+                        }
+                    }
+                    else
+                    {
+                        lastestFailed = true;
+                        Console.WriteLine("Drop data:");
+                        Console.Write('\t');
+                        Console.WriteLine(ToHexString(buffer));
                     }
                 }
             }
+        }
+
+        private static string ToHexString(byte[] buffer)
+        {
+            return string.Join(" ", System.Linq.Enumerable.Select(buffer, b => b.ToString("X2")));
         }
 
         private static IEnumerable<byte> StreamToEnumerable(Stream s)
