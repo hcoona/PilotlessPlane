@@ -8,6 +8,7 @@ using BIT.PilotlessPlane.Models;
 using BIT.PilotlessPlane.Providers.Interface;
 using FrameValidator = BIT.PilotlessPlane.Models.Underlying.FrameValidator;
 using System.Reactive.Disposables;
+using System.Threading.Tasks;
 
 namespace BIT.PilotlessPlane.Client.Views
 {
@@ -33,21 +34,16 @@ namespace BIT.PilotlessPlane.Client.Views
             var header0Array = new byte[] { FrameValidator.Header0 };
 
             var rawSource = provider.GetBytes().Publish();
-            var bufferedSource = rawSource.Buffer(
-                rawSource.Buffer(2, 1).Where(bytes => FrameValidator.ValidateHeader(bytes)),
-                _ => rawSource.Skip(FrameValidator.FrameSize - 2 - 1)).Select(tl => header0Array.Concat(tl).ToArray());
-            var invalidSource = bufferedSource.Where(buffer => !FrameValidator.Validate(buffer));
-            var source = (from buffer in bufferedSource
-                          where FrameValidator.Validate(buffer)
-                          select FrameParser.ParseFrame(buffer.ToArray()));
-                         //.Sample(TimeSpan.FromSeconds(this.timer_UpdateUI.Interval));
+            var bufferedSource = rawSource.Buffer(FrameValidator.FrameSize, 1);
+            var source = bufferedSource
+                .Where(FrameValidator.Validate)
+                .Select(x => FrameParser.ParseFrame(x.ToArray()));
 
             this.subscribe = new CompositeDisposable(
-                source.Subscribe(
+                source.SubscribeOn(this).Subscribe(
                     this.BindFrame,
                     ex => this.LogException(ex),
-                    () => { this.timer_UpdateUI.Stop(); MessageBox.Show(this, "Done."); }),
-                rawSource.Buffer(36).Subscribe(bytes => Console.WriteLine(string.Join(" ", bytes.Select(b => b.ToString("X2")))))
+                    () => { this.timer_UpdateUI.Stop(); MessageBox.Show(this, "Done."); })
                 //invalidSource.Subscribe(
                 //    bytes => Console.WriteLine(string.Join(" ", bytes.Select(b => b.ToString("X2")))))
                 );
@@ -62,7 +58,7 @@ namespace BIT.PilotlessPlane.Client.Views
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if(this.subscribe != null)
+            if (this.subscribe != null)
             {
                 this.subscribe.Dispose();
             }
@@ -70,7 +66,7 @@ namespace BIT.PilotlessPlane.Client.Views
 
         private void BindFrame(IReceivedFrame frame)
         {
-            if(frame is FrameA)
+            if (frame is FrameA)
             {
                 BindFrameA((FrameA)frame);
             }
