@@ -45,6 +45,7 @@
     <Compile Include="FrameA.cs" />
     <Compile Include="FrameB.cs" />
     <Compile Include="FrameC.cs" />
+    <Compile Include="FrameParser.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="IFrame.cs" />
     <Compile Include="IReceivedFrame.cs" />

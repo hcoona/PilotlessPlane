@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Reactive.Linq;
 using System.Windows.Forms;
 using BIT.PilotlessPlane.Models;
 using BIT.PilotlessPlane.Providers.Interface;
+using FrameValidator = BIT.PilotlessPlane.Models.Underlying.FrameValidator;
+using System.Reactive.Disposables;
 
 namespace BIT.PilotlessPlane.Client.Views
 {
     public partial class MainForm : Form
     {
         private readonly IFrameProvider provider;
+        private IDisposable subscribe = null;
         private FrameForm frameForm = null;
 
         public MainForm(IFrameProvider provider)
@@ -25,28 +30,47 @@ namespace BIT.PilotlessPlane.Client.Views
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            var enumerator = provider.GetFrames();
-            this.backgroundWorker_Binding.RunWorkerAsync(enumerator);
+            var header0Array = new byte[] { FrameValidator.Header0 };
+
+            var rawSource = provider.GetBytes().Publish();
+            var bufferedSource = rawSource.Buffer(
+                rawSource.Buffer(2, 1).Where(bytes => FrameValidator.ValidateHeader(bytes)),
+                _ => rawSource.Skip(FrameValidator.FrameSize - 2 - 1)).Select(tl => header0Array.Concat(tl).ToArray());
+            var invalidSource = bufferedSource.Where(buffer => !FrameValidator.Validate(buffer));
+            var source = (from buffer in bufferedSource
+                          where FrameValidator.Validate(buffer)
+                          select FrameParser.ParseFrame(buffer.ToArray()));
+                         //.Sample(TimeSpan.FromSeconds(this.timer_UpdateUI.Interval));
+
+            this.subscribe = new CompositeDisposable(
+                source.Subscribe(
+                    this.BindFrame,
+                    ex => this.LogException(ex),
+                    () => { this.timer_UpdateUI.Stop(); MessageBox.Show(this, "Done."); }),
+                rawSource.Buffer(36).Subscribe(bytes => Console.WriteLine(string.Join(" ", bytes.Select(b => b.ToString("X2")))))
+                //invalidSource.Subscribe(
+                //    bytes => Console.WriteLine(string.Join(" ", bytes.Select(b => b.ToString("X2")))))
+                );
+
+            rawSource.Connect();
         }
 
-        private void backgroundWorker_Binding_DoWork(object sender, DoWorkEventArgs e)
+        private void LogException(Exception ex)
         {
-            var enumerator = e.Argument as IEnumerator<object>;
-            while (enumerator.MoveNext())
-            {
-                this.backgroundWorker_Binding.ReportProgress(0, enumerator.Current);
-            }
-            if(enumerator is IDisposable)
-            {
-                ((IDisposable)enumerator).Dispose();
-            }
-            this.timer_UpdateUI.Stop();
+            throw new NotImplementedException();
         }
 
-        private void backgroundWorker_Binding_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            var frame = e.UserState;
-            if (frame is FrameA)
+            if(this.subscribe != null)
+            {
+                this.subscribe.Dispose();
+            }
+        }
+
+        private void BindFrame(IReceivedFrame frame)
+        {
+            if(frame is FrameA)
             {
                 BindFrameA((FrameA)frame);
             }
@@ -58,11 +82,10 @@ namespace BIT.PilotlessPlane.Client.Views
             {
                 BindFrameC((FrameC)frame);
             }
-        }
-
-        private void backgroundWorker_Binding_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            MessageBox.Show(this, "Done.");
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
         }
 
         private void BindFrameA(FrameA frameA)
@@ -120,11 +143,12 @@ namespace BIT.PilotlessPlane.Client.Views
 
         private void timer_UpdateUI_Tick(object sender, EventArgs e)
         {
-            this.gyroscopeUserControl1.Refresh();
-            this.dashboardUserControl1.Refresh();
-            this.dashboardUserControl2.Refresh();
-            this.dashboardUserControl3.Refresh();
-            this.directionDashboardUserControl1.Refresh();
+            this.Refresh();
+            //this.gyroscopeUserControl1.Refresh();
+            //this.dashboardUserControl1.Refresh();
+            //this.dashboardUserControl2.Refresh();
+            //this.dashboardUserControl3.Refresh();
+            //this.directionDashboardUserControl1.Refresh();
         }
     }
 }

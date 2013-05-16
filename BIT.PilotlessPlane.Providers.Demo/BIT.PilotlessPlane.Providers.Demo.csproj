@@ -34,6 +34,18 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Reactive.Core">
+      <HintPath>..\packages\Rx-Core.2.1.30214.0\lib\Net40\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\packages\Rx-Interfaces.2.1.30214.0\lib\Net40\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>..\packages\Rx-Linq.2.1.30214.0\lib\Net40\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices">
+      <HintPath>..\packages\Rx-PlatformServices.2.1.30214.0\lib\Net40\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,14 +65,13 @@
       <Project>{ae3ad86c-960c-41a7-a109-d93905eb9909}</Project>
       <Name>BIT.PilotlessPlane.Providers.Implement.Local</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BIT.PilotlessPlane.Providers.Implement.SerialPort\BIT.PilotlessPlane.Providers.Implement.SerialPort.csproj">
-      <Project>{4ee31d6d-7657-400a-9f02-0389e238e3fd}</Project>
-      <Name>BIT.PilotlessPlane.Providers.Implement.SerialPort</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BIT.PilotlessPlane.Providers.Interface\BIT.PilotlessPlane.Providers.Interface.csproj">
       <Project>{4398fada-1f02-4049-b777-8aa28a999752}</Project>
       <Name>BIT.PilotlessPlane.Providers.Interface</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

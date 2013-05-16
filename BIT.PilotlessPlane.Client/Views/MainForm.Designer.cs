@@ -41,7 +41,6 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.backgroundWorker_Binding = new System.ComponentModel.BackgroundWorker();
             this.timer_UpdateUI = new System.Windows.Forms.Timer(this.components);
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -222,13 +221,6 @@
             this.toolStripMenuItem1.Text = "查看帧";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
-            // backgroundWorker_Binding
-            // 
-            this.backgroundWorker_Binding.WorkerReportsProgress = true;
-            this.backgroundWorker_Binding.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_Binding_DoWork);
-            this.backgroundWorker_Binding.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_Binding_ProgressChanged);
-            this.backgroundWorker_Binding.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_Binding_RunWorkerCompleted);
-            // 
             // timer_UpdateUI
             // 
             this.timer_UpdateUI.Enabled = true;
@@ -247,6 +239,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "地面站";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
@@ -266,7 +259,6 @@
         private DashboardUserControl dashboardUserControl2;
         private DashboardUserControl dashboardUserControl3;
         private DirectionDashboardUserControl directionDashboardUserControl1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker_Binding;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.PictureBox pictureBox1;
