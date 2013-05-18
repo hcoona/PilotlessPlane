@@ -34,18 +34,21 @@ namespace BIT.PilotlessPlane.Client.Views
             var header0Array = new byte[] { FrameValidator.Header0 };
 
             var rawSource = provider.GetBytes().Publish();
-            var bufferedSource = rawSource.Buffer(FrameValidator.FrameSize, 1);
+            var bufferedSource = rawSource
+                .Buffer(FrameValidator.FrameSize, 1)
+                .Where(FrameValidator.ValidateHeader);
             var source = bufferedSource
                 .Where(FrameValidator.Validate)
                 .Select(x => FrameParser.ParseFrame(x.ToArray()));
+            var invalidSource = bufferedSource.Where(x => !FrameValidator.Validate(x));
 
             this.subscribe = new CompositeDisposable(
                 source.SubscribeOn(this).Subscribe(
                     this.BindFrame,
                     ex => this.LogException(ex),
-                    () => { this.timer_UpdateUI.Stop(); MessageBox.Show(this, "Done."); })
-                //invalidSource.Subscribe(
-                //    bytes => Console.WriteLine(string.Join(" ", bytes.Select(b => b.ToString("X2")))))
+                    () => { this.timer_UpdateUI.Stop(); MessageBox.Show(this, "Done."); }),
+                invalidSource.Subscribe(
+                    bytes => Console.WriteLine(string.Join(" ", bytes.Select(b => b.ToString("X2")))))
                 );
 
             rawSource.Connect();

@@ -54,7 +54,7 @@ namespace BIT.PilotlessPlane.Client
         {
             var builder = new ContainerBuilder();
             builder
-                .Register<LocalFrameProvider>(ctx => new LocalFrameProvider("_20130510_txt", 7))
+                .Register<LocalFrameProvider>(ctx => new LocalFrameProvider(delayInMilliseconds: 1000D / 1080D))
                 .As<IFrameProvider>()
                 .SingleInstance();
             builder.RegisterModule<ConfigurationSettingsReader>();

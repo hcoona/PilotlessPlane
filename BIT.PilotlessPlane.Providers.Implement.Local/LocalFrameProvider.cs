@@ -10,16 +10,14 @@ namespace BIT.PilotlessPlane.Providers.Implement.Local
 {
     public class LocalFrameProvider : IFrameProvider
     {
-        private readonly int delay;
-        private readonly byte[] data;
         private readonly IObservable<byte> observable;
 
-        public LocalFrameProvider(string resourceName = "_20130510_txt", int delay = 34)
+        public LocalFrameProvider(string resourceName = "_20130510_txt", double delayInMilliseconds = 34)
         {
-            this.delay = delay;
-            this.data = (byte[])Resources.ResourceManager.GetObject(resourceName);
+            var delay = TimeSpan.FromMilliseconds(delayInMilliseconds);
+            var data = (byte[])Resources.ResourceManager.GetObject(resourceName);
             this.observable = Observable.Using<byte, Stream>(
-                () => new MemoryStream(this.data),
+                () => new MemoryStream(data),
                 s => Observable.Create<byte>(observer => Task.Factory.StartNew(() =>
                 {
                     try

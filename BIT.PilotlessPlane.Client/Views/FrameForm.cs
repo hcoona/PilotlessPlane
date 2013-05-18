@@ -19,71 +19,77 @@ namespace BIT.PilotlessPlane.Client.Views
 
         public void BindFrameA(FrameA frame)
         {
-            this.label_f俯仰角_value.Text = frame.f俯仰角.ToString("F1");
-            this.label_f滚转角_value.Text = frame.g滚转角.ToString("F1");
-            this.label_c磁航向_value.Text = frame.c磁航向.ToString("F1");
-            this.label_g滚转角速率_value.Text = frame.g滚转角速率.ToString("F1");
-            this.label_p偏航角速率_value.Text = frame.p偏航角速率.ToString("F1");
-            this.label_f俯仰角速率_value.Text = frame.f俯仰角速率.ToString("F1");
-            this.label_X轴线加速度_value.Text = frame.X轴线加速度.ToString("F2");
-            this.label_Y轴线加速度_value.Text = frame.Y轴线加速度.ToString("F2");
-            this.label_Z轴线加速度_value.Text = frame.Z轴线加速度.ToString("F2");
-            this.label_s升降舵量_value.Text = frame.s升降舵量.ToString("F1");
-            this.label_f副翼舵量_value.Text = frame.f副翼舵量.ToString("F1");
-            this.label_f方向舵量_value.Text = frame.f方向舵量.ToString("F1");
-            this.label_y油门舵量_value.Text = frame.y油门舵量.ToString();
-            this.label_s升降速度_value.Text = frame.s升降速度.ToString("F1");
-            this.label_c超声波高度_value.Text = frame.c超声波高度.ToString("F1");
-            this.label_GPS时_value.Text = frame.GPS时.ToString();
-            this.label_GPS分_value.Text = frame.GPS分.ToString();
-            this.label_GPS秒_value.Text = frame.GPS秒.ToString();
-            this.label_z帧计数_value.Text = frame.z帧计数.ToString();
+            var sb = new StringBuilder();
+            sb.AppendFormat("{0}：{1:F1}", "俯仰角", frame.f俯仰角).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "滚转角", frame.g滚转角).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "磁航向", frame.c磁航向).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "滚转角速率", frame.g滚转角速率).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "偏航角速率", frame.p偏航角速率).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "俯仰角速率", frame.f俯仰角速率).AppendLine();
+            sb.AppendFormat("{0}：{1:F2}", "X轴线加速度", frame.X轴线加速度).AppendLine();
+            sb.AppendFormat("{0}：{1:F2}", "Y轴线加速度", frame.Y轴线加速度).AppendLine();
+            sb.AppendFormat("{0}：{1:F2}", "Z轴线加速度", frame.Z轴线加速度).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "升降舵量", frame.s升降舵量).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "副翼舵量", frame.f副翼舵量).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "方向舵量", frame.f方向舵量).AppendLine();
+            sb.AppendFormat("{0}：{1}", "油门舵量", frame.y油门舵量).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "升降速度", frame.s升降速度).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "超声波高度", frame.c超声波高度).AppendLine();
+            sb.AppendFormat("{0}：{1}", "GPS时", frame.GPS时).AppendLine();
+            sb.AppendFormat("{0}：{1}", "GPS分", frame.GPS分).AppendLine();
+            sb.AppendFormat("{0}：{1}", "GPS秒", frame.GPS秒).AppendLine();
+            sb.AppendFormat("{0}：{1}", "z帧计数", frame.z帧计数).AppendLine();
+            this.textBox_FrameA.Text = sb.ToString();
         }
 
         public void BindFrameB(FrameB frame)
         {
-            this.label_FrameB_GPS经度_value.Text = frame.GPS经度.ToString("F7");
-            this.label_FrameB_GPS维度_value.Text = frame.GPS维度.ToString("F7");
-            this.label_FrameB_GPS地速_value.Text = frame.GPS地速.ToString("F1");
-            this.label_FrameB_GPS地速方向_value.Text = frame.GPS地速方向.ToString("F1");
-            this.label_FrameB_GPS高度_value.Text = frame.GPS高度.ToString("F1");
-            this.label_FrameB_GPS升降速度_value.Text = frame.GPS升降速度.ToString("F1");
-            this.label_FrameB_GPS可见星数_value.Text = frame.GPS可见星数.ToString();
-            this.label_FrameB_GPS工作状态_value.Text = frame.GPS工作状态.ToString();
-            this.label_FrameB_GPS东向速度_value.Text = frame.GPS东向速度.ToString("F1");
-            this.label_FrameB_GPS北向速度_value.Text = frame.GPS北向速度.ToString("F1");
-            this.label_FrameB_f俯仰给定_value.Text = frame.f俯仰给定.ToString("F1");
-            this.label_FrameB_g滚转给定_value.Text = frame.g滚转给定.ToString("F1");
-            this.label_FrameB_g高度积分_value.Text = frame.g高度积分.ToString("F1");
-            this.label_FrameB_f俯仰积分_value.Text = frame.f俯仰积分.ToString("F1");
-            this.label_FrameB_f滚转积分_value.Text = frame.f滚转积分.ToString("F1");
-            this.label_FrameB_GPS时_value.Text = frame.GPS时.ToString();
-            this.label_FrameB_GPS分_value.Text = frame.GPS分.ToString();
-            this.label_FrameB_GPS秒_value.Text = frame.GPS秒.ToString();
-            this.label_FrameB_z帧计数_value.Text = frame.z帧计数.ToString();
+            var sb = new StringBuilder();
+            sb.AppendFormat("{0}：{1:F7}", "GPS经度", frame.GPS经度).AppendLine();
+            sb.AppendFormat("{0}：{1:F7}", "GPS维度", frame.GPS维度).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "GPS地速", frame.GPS地速).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "GPS地速方向", frame.GPS地速方向).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "GPS高度", frame.GPS高度).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "GPS升降速度", frame.GPS升降速度).AppendLine();
+            sb.AppendFormat("{0}：{1}", "GPS可见星数", frame.GPS可见星数).AppendLine();
+            sb.AppendFormat("{0}：{1}", "GPS工作状态", frame.GPS工作状态).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "GPS东向速度", frame.GPS东向速度).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "GPS北向速度", frame.GPS北向速度).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "俯仰给定", frame.f俯仰给定).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "滚转给定", frame.g滚转给定).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "高度积分", frame.g高度积分).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "俯仰积分", frame.f俯仰积分).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "滚转积分", frame.f滚转积分).AppendLine();
+            sb.AppendFormat("{0}：{1}", "GPS时", frame.GPS时).AppendLine();
+            sb.AppendFormat("{0}：{1}", "GPS分", frame.GPS分).AppendLine();
+            sb.AppendFormat("{0}：{1}", "GPS秒", frame.GPS秒).AppendLine();
+            sb.AppendFormat("{0}：{1}", "z帧计数", frame.z帧计数).AppendLine();
+            this.textBox_FrameB.Text = sb.ToString();
         }
 
         public void BindFrameC(FrameC frame)
         {
-            this.label_FrameC_z纵向模态_value.Text = frame.z纵向模态.ToString();
-            this.label_FrameC_h横向模态_value.Text = frame.h横向模态.ToString();
-            this.label_FrameC_d导航模态_value.Text = frame.d导航模态.ToString();
-            this.label_FrameC_g故障标志字_value.Text = frame.g故障标志字.ToString().Substring("BitVector32{".Length + 32 - 8, 8);
-            this.label_FrameC_k开关量标志字1_value.Text = frame.k开关量标志字1.ToString().Substring("BitVector32{".Length + 32 - 8, 8);
-            this.label_FrameC_k开关量标志字2_value.Text = frame.k开关量标志字2.ToString().Substring("BitVector32{".Length + 32 - 8, 8);
-            this.label_FrameC_h航向偏差_value.Text = frame.h航向偏差.ToString("F1");
-            this.label_FrameC_h航段号_value.Text = frame.h航段号.ToString();
-            this.label_FrameC_d待飞距离_value.Text = frame.d待飞距离.ToString("F1");
-            this.label_FrameC_c侧偏距_value.Text = frame.c侧偏距.ToString("F1");
-            this.label_FrameC_q气压高度_value.Text = frame.q气压高度.ToString("F1");
-            this.label_FrameC_z指示空速_value.Text = frame.z指示空速.ToString("F1");
-            this.label_FrameC_z真空速_value.Text = frame.z真空速.ToString("F1");
-            this.label_FrameC_g高度给定_value.Text = frame.g高度给定.ToString();
-            this.label_FrameC_g高度差_value.Text = frame.g高度差.ToString("F1");
-            this.label_FrameC_GPS时_value.Text = frame.GPS时.ToString();
-            this.label_FrameC_GPS分_value.Text = frame.GPS分.ToString();
-            this.label_FrameC_GPS秒_value.Text = frame.GPS秒.ToString();
-            this.label_FrameC_z帧计数_value.Text = frame.z帧计数.ToString();
+            var sb = new StringBuilder();
+            sb.AppendFormat("{0}：{1}", "纵向模态", frame.z纵向模态).AppendLine();
+            sb.AppendFormat("{0}：{1}", "横向模态", frame.h横向模态).AppendLine();
+            sb.AppendFormat("{0}：{1}", "导航模态", frame.d导航模态).AppendLine();
+            sb.AppendFormat("{0}：{1}", "故障标志字", frame.g故障标志字).AppendLine();
+            sb.AppendFormat("{0}：{1}", "开关量标志字1", frame.k开关量标志字1.ToString().Substring("BitVector32{".Length + 32 - 8, 8)).AppendLine();
+            sb.AppendFormat("{0}：{1}", "开关量标志字2", frame.k开关量标志字2.ToString().Substring("BitVector32{".Length + 32 - 8, 8)).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "航向偏差", frame.h航向偏差).AppendLine();
+            sb.AppendFormat("{0}：{1}", "航段号", frame.h航段号).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "待飞距离", frame.d待飞距离).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "侧偏距", frame.c侧偏距).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "气压高度", frame.q气压高度).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "指示空速", frame.z指示空速).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "真空速", frame.z真空速).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "高度给定", frame.g高度给定).AppendLine();
+            sb.AppendFormat("{0}：{1:F1}", "高度差", frame.g高度差).AppendLine();
+            sb.AppendFormat("{0}：{1}", "GPS时", frame.GPS时).AppendLine();
+            sb.AppendFormat("{0}：{1}", "GPS分", frame.GPS分).AppendLine();
+            sb.AppendFormat("{0}：{1}", "GPS秒", frame.GPS秒).AppendLine();
+            sb.AppendFormat("{0}：{1}", "z帧计数", frame.z帧计数).AppendLine();
+            this.textBox_FrameC.Text = sb.ToString();
         }
     }
 }
