@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using BIT.PilotlessPlane.Client.Properties;
 
@@ -41,7 +42,14 @@ namespace BIT.PilotlessPlane.Client.Views
 
             e.Graphics.TranslateTransform(0F, (float)(this.f俯仰角 / 0.5));
             e.Graphics.RotateTransform(-(float)this.g滚转角);
-            e.Graphics.DrawImage(Resources.陀螺仪背景, this.ClientRectangle);
+            var t陀螺仪背景Rectangle = new Rectangle(
+                -Convert.ToInt32((Resources.陀螺仪背景.Width - ClientWidth) / 2D),
+                -Convert.ToInt32((Resources.陀螺仪背景.Height - ClientHeight) / 2D),
+                Resources.陀螺仪背景.Width,
+                Resources.陀螺仪背景.Height);
+            e.Graphics.DrawImage(
+                Resources.陀螺仪背景,
+                t陀螺仪背景Rectangle);
             e.Graphics.ResetTransform();
 
             e.Graphics.DrawImage(Resources.陀螺仪框架, this.ClientRectangle);
