@@ -130,7 +130,7 @@
             this.dashboardUserControl1.TabIndex = 1;
             this.dashboardUserControl1.Title = "油门";
             this.dashboardUserControl1.Unit = "";
-            this.dashboardUserControl1.UnitFormat = "R";
+            this.dashboardUserControl1.UnitFormat = "F0";
             // 
             // dashboardUserControl2
             // 
@@ -146,9 +146,9 @@
             this.dashboardUserControl2.PointerColor = System.Drawing.Color.Green;
             this.dashboardUserControl2.Size = new System.Drawing.Size(120, 120);
             this.dashboardUserControl2.TabIndex = 2;
-            this.dashboardUserControl2.Title = "空速";
-            this.dashboardUserControl2.Unit = "km/h";
-            this.dashboardUserControl2.UnitFormat = "R";
+            this.dashboardUserControl2.Title = "高度";
+            this.dashboardUserControl2.Unit = "m";
+            this.dashboardUserControl2.UnitFormat = "F0";
             // 
             // dashboardUserControl3
             // 
@@ -166,7 +166,7 @@
             this.dashboardUserControl3.TabIndex = 3;
             this.dashboardUserControl3.Title = "地速";
             this.dashboardUserControl3.Unit = "km/h";
-            this.dashboardUserControl3.UnitFormat = "R";
+            this.dashboardUserControl3.UnitFormat = "F0";
             // 
             // directionDashboardUserControl1
             // 

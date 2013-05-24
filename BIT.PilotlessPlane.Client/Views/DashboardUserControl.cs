@@ -100,7 +100,13 @@ namespace BIT.PilotlessPlane.Client.Views
 
         private void DrawTitle(Graphics g, float yAxis)
         {
-            ;
+            var size = g.MeasureString(this.Title, Global.SmallChineseFont);
+            g.DrawString(
+                this.Title,
+                Global.SmallChineseFont,
+                Brushes.White,
+                -size.Width / 2F,
+                Convert.ToSingle(yAxis * 0.7 - size.Height / 2D));
         }
 
         private void DrawUnit(Graphics g, float yAxis)

@@ -14,6 +14,8 @@ namespace BIT.PilotlessPlane.Client
 
         public static readonly Font SmallEnglishFont = new Font("Arial", 7F);
 
+        public static readonly Font SmallChineseFont = new Font("宋体", 9F);
+
         public static readonly CoordinateSystemsEnum CoordinateSystem = CoordinateSystemsEnum.RightHandedSystem;
     }
 }

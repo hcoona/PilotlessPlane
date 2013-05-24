@@ -88,6 +88,7 @@ namespace BIT.PilotlessPlane.Client.Views
         {
             this.gyroscopeUserControl1.GPS高度 = frameB.GPS高度;
 
+            this.dashboardUserControl2.CurrentValue = frameB.GPS高度;
             this.dashboardUserControl3.CurrentValue = frameB.GPS地速;
 
             this.directionDashboardUserControl1.d地速方向 = frameB.GPS地速方向;
@@ -100,8 +101,6 @@ namespace BIT.PilotlessPlane.Client.Views
 
         private void BindFrameC(FrameC frameC)
         {
-            this.dashboardUserControl2.CurrentValue = frameC.z指示空速;
-
             if (this.frameForm != null)
             {
                 this.frameForm.BindFrameC(frameC);
