@@ -51,6 +51,10 @@
       <Project>{4398fada-1f02-4049-b777-8aa28a999752}</Project>
       <Name>BIT.PilotlessPlane.Providers.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ZhangShuai.Extensions\ZhangShuai.Extensions.csproj">
+      <Project>{473f1dfc-30eb-4458-97ec-554c5b0e0852}</Project>
+      <Name>ZhangShuai.Extensions</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

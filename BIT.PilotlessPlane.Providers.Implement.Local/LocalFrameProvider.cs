@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using BIT.PilotlessPlane.Models.Underlying;
-using BIT.PilotlessPlane.Providers.Implement.Local.Properties;
 using BIT.PilotlessPlane.Providers.Interface;
 using ZhangShuai.Extensions;
 using IReceivedFrame = BIT.PilotlessPlane.Models.IReceivedFrame;
@@ -13,14 +12,16 @@ namespace BIT.PilotlessPlane.Providers.Implement.Local
     {
         private static readonly int FRAME_SIZE = 36;
         private readonly byte[] data;
+        private readonly int delayMilliseconds;
 
-        public LocalFrameProvider(byte[] data)
+        public LocalFrameProvider(byte[] data, int delayMilliseconds = 7)
         {
             if (data == null)
             {
                 throw new ArgumentNullException();
             }
             this.data = data;
+            this.delayMilliseconds = delayMilliseconds;
         }
 
         public IEnumerator<IReceivedFrame> GetFrames()
@@ -45,7 +46,7 @@ namespace BIT.PilotlessPlane.Providers.Implement.Local
                             lastestFailed = false;
                         }
                         yield return Parse(buffer);
-                        System.Threading.Thread.Sleep(50);
+                        System.Threading.Thread.Sleep(this.delayMilliseconds);
                         for (var i = 1; i < FRAME_SIZE; i++)
                         {
                             e.MoveNext();
