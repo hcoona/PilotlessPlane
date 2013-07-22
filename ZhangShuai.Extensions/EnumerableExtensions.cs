@@ -13,7 +13,7 @@ namespace ZhangShuai.Extensions
 
         public static IEnumerable<T[]> ToWindowed<T>(this IEnumerable<T> source, int windowSize)
         {
-            Contract.Requires<ArgumentNullException>(source != null);
+            Contract.Requires(source != null);
             Contract.Requires(windowSize > 0);
 
             var queue = new Queue<T>(windowSize);

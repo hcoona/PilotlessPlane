@@ -41,13 +41,12 @@ namespace BIT.PilotlessPlane.Providers.Implement.SerialPort
                 {
                     if (lastestFailed)
                     {
-                        Console.WriteLine("Finally Success:");
-                        Console.Write('\t');
-                        Console.WriteLine(ToHexString(buffer));
+                        //Console.WriteLine("Finally Success:");
+                        //Console.Write('\t');
+                        //Console.WriteLine(ToHexString(buffer));
                         lastestFailed = false;
                     }
                     yield return Parse(buffer);
-                    System.Threading.Thread.Sleep(50);
                     for (var i = 1; i < FRAME_SIZE; i++)
                     {
                         e.MoveNext();
@@ -56,9 +55,9 @@ namespace BIT.PilotlessPlane.Providers.Implement.SerialPort
                 else
                 {
                     lastestFailed = true;
-                    Console.WriteLine("Drop data:");
-                    Console.Write('\t');
-                    Console.WriteLine(ToHexString(buffer));
+                    //Console.WriteLine("Drop data:");
+                    //Console.Write('\t');
+                    //Console.WriteLine(ToHexString(buffer));
                 }
             }
         }

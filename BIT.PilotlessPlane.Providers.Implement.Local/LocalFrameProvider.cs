@@ -40,9 +40,6 @@ namespace BIT.PilotlessPlane.Providers.Implement.Local
                     {
                         if(lastestFailed)
                         {
-                            Console.WriteLine("Finally Success:");
-                            Console.Write('\t');
-                            Console.WriteLine(ToHexString(buffer));
                             lastestFailed = false;
                         }
                         yield return Parse(buffer);
@@ -55,9 +52,6 @@ namespace BIT.PilotlessPlane.Providers.Implement.Local
                     else
                     {
                         lastestFailed = true;
-                        Console.WriteLine("Drop data:");
-                        Console.Write('\t');
-                        Console.WriteLine(ToHexString(buffer));
                     }
                 }
             }

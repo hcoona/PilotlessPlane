@@ -2,12 +2,7 @@
 using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
-using Autofac;
-using Autofac.Configuration;
 using BIT.PilotlessPlane.Client.Views;
-using BIT.PilotlessPlane.Providers.Implement.Local;
-using BIT.PilotlessPlane.Providers.Interface;
-using LocalDataResources = BIT.PilotlessPlane.Providers.Implement.Local.Properties.Resources;
 
 namespace BIT.PilotlessPlane.Client
 {
@@ -24,20 +19,12 @@ namespace BIT.PilotlessPlane.Client
 
             if (!Debugger.IsAttached)
             {
+                Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
                 AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
                 Application.ThreadException += Application_ThreadException;
             }
 
-            IContainer container = null;
-            try
-            {
-                container = BuildContainer();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-            Application.Run(container.Resolve<MainForm>());
+            Application.Run(new ConfigurationForm());
         }
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
@@ -48,17 +35,6 @@ namespace BIT.PilotlessPlane.Client
         static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
             MessageBox.Show(e.Exception.Message);
-        }
-
-        private static IContainer BuildContainer()
-        {
-            var builder = new ContainerBuilder();
-            builder
-                .Register<LocalFrameProvider>(ctx => new LocalFrameProvider(LocalDataResources._20130510_txt))
-                .As<IFrameProvider>()
-                .SingleInstance();
-            builder.RegisterModule<ConfigurationSettingsReader>();
-            return builder.Build();
         }
     }
 }
