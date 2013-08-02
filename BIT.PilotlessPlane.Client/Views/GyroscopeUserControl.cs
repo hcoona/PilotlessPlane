@@ -40,7 +40,10 @@ namespace BIT.PilotlessPlane.Client.Views
             e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 
             e.Graphics.TranslateTransform(0F, (float)(this.f俯仰角 / 0.5));
+            e.Graphics.TranslateTransform(this.Center.X, this.Center.Y);
             e.Graphics.RotateTransform(-(float)this.g滚转角);
+            var t陀螺仪背景Rectangle = this.ClientRectangle;
+            t陀螺仪背景Rectangle.Offset(-this.Center.X, -this.Center.Y);
             e.Graphics.DrawImage(Resources.陀螺仪背景, this.ClientRectangle);
             e.Graphics.ResetTransform();
 
