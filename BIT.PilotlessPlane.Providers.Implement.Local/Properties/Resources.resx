@@ -124,4 +124,7 @@
   <data name="_20130510_txt" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\20130510.txt.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="_20130705测试数据" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\20130705测试数据.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

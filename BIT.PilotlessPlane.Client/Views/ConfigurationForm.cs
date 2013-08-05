@@ -40,7 +40,10 @@ namespace BIT.PilotlessPlane.Client.Views
             }
             else
             {
-                comboBox_PortName.SelectedIndex = 0;
+                if (comboBox_PortName.Items.Count != 0)
+                {
+                    comboBox_PortName.SelectedIndex = 0;
+                }
             }
             this.BaudRate = Global.BaudRate;
             this.Parity = Global.Parity;
@@ -89,7 +92,7 @@ namespace BIT.PilotlessPlane.Client.Views
         {
             if (UseLocal)
             {
-                return new MainForm(new LocalFrameProvider(LocalDataResources._20130510_txt));
+                return new MainForm(new LocalFrameProvider(LocalDataResources._20130705测试数据));
             }
             else
             {

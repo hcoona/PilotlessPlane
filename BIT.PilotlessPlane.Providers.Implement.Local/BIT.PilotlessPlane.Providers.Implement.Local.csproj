@@ -71,6 +71,7 @@
   <ItemGroup>
     <None Include="Resources\20130402 测试数据.bin" />
     <None Include="Resources\20130510.txt.bin" />
+    <None Include="Resources\20130705测试数据.bin" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

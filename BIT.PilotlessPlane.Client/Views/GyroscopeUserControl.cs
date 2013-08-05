@@ -40,13 +40,12 @@ namespace BIT.PilotlessPlane.Client.Views
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 
-            e.Graphics.TranslateTransform(0F, (float)(this.f俯仰角 / 0.5));
+            e.Graphics.TranslateTransform(this.Center.X, this.Center.Y);
             e.Graphics.RotateTransform(-(float)this.g滚转角);
-            var t陀螺仪背景Rectangle = new Rectangle(
-                -Convert.ToInt32((Resources.陀螺仪背景.Width - ClientWidth) / 2D),
-                -Convert.ToInt32((Resources.陀螺仪背景.Height - ClientHeight) / 2D),
-                Resources.陀螺仪背景.Width,
-                Resources.陀螺仪背景.Height);
+            e.Graphics.TranslateTransform(0F, (float)(this.f俯仰角 / 0.5));
+            var t陀螺仪背景Rectangle = this.ClientRectangle;
+            t陀螺仪背景Rectangle.Offset(-this.Center.X, -this.Center.Y);
+            t陀螺仪背景Rectangle.Inflate(this.ClientSize);
             e.Graphics.DrawImage(
                 Resources.陀螺仪背景,
                 t陀螺仪背景Rectangle);
